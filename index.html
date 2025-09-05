@@ -2,57 +2,42 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Web Đa Năng - Bản Đẹp Hơn</title>
+  <title>Web Đa Năng (beta)</title>
   <style>
-   body {
+    body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      color: white;
+      color: gray;
       min-height: 100vh;
       overflow-x: hidden;
-   }
-   #bgVideo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-  opacity: 0.75;
-  pointer-events: none;
-  filter: brightness(1.1) saturate(1.1);
-  transition: opacity 1s ease;
-}
-
-.toggle-btn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 999;
-  background-color: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 16px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-@keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.welcome {
-  animation: fadeInUp 1s ease-in-out;
-}
-
-.search-container {
-  animation: fadeInUp 1.5s ease-in-out;
-}
-
+    }
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.75;
+      pointer-events: none;
+      filter: brightness(1.1) saturate(1.1);
+      transition: opacity 1s ease;
+    }
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 16px;
+    }
     .navbar {
       background-color: rgba(0, 0, 0, 0.6);
       padding: 12px 24px;
@@ -60,23 +45,26 @@
       max-width: 90%;
       margin: 20px auto;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      flex-wrap: wrap;
     }
-
-    .navbar h1 {
-      margin: 0;
-      font-size: 20px;
+    .webcuatoi {
+      font-size: 42px;
+      color: #ffffff;
+      text-shadow: 2px 2px 6px rgb(255, 255, 255);
+      margin-bottom: 10px;
     }
-
+    .creatby {
+      font-size: 12px;
+      color: darksalmon;
+      margin-bottom: 6px;
+    }
     .search-container {
-  position: relative;
-  width: 98%;
-  max-width: 500px;
-  margin-top: 10px;
-}
-
+      position: relative;
+      width: 98%;
+      max-width: 400px;
+      margin-top: 10px;
+    }
     #tuKhoa {
       width: 100%;
       padding: 10px 16px;
@@ -84,7 +72,6 @@
       border: none;
       font-size: 16px;
     }
-
     .suggestions-box {
       position: absolute;
       top: 42px;
@@ -101,519 +88,261 @@
       padding: 0;
       z-index: 10;
     }
-
-    .suggestions-box li {
-      padding: 10px;
-      cursor: pointer;
-    }
-
-    .suggestions-box li:hover {
-      background-color: #f0f0f0;
-    }
-
+    .suggestions-box li { padding: 10px; cursor: pointer; }
+    .suggestions-box li:hover { background-color: #f0f0f0; }
     .container {
       max-width: 960px;
       margin: auto;
       padding: 40px 20px;
       text-align: center;
     }
-
-    .welcome {
-      font-size: 42px;
-      color: #000000;
-      text-shadow: 2px 2px 6px black;
-      margin-bottom: 20px;
-    }
-    .webcuatoi {
-      font-size: 42px;
-      color: #ffffff;
-      text-shadow: 2px 2px 6px rgb(255, 255, 255);
-      margin-bottom: 20px;
-    }
-    .creatby {
-      font-size: 10px;
-      color: darksalmon;
-      text-shadow: darksalmon;
-      margin-bottom: 10px;
-    }
-
+    .welcome { font-size: 42px; margin-bottom: 20px; color: black; }
     .button-group {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin: 30px 0;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin: 30px 0;
     }
-
     .button-group button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #007bff;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      cursor: pointer;
-      transition: background-color 0.3s;
+      padding: 10px 20px; font-size: 16px; background-color: #007bff;
+      border: none; border-radius: 8px; color: white; cursor: pointer;
     }
-
-    .button-group button:hover {
-      background-color: #0056b3;
-    }
-
+    .button-group button:hover { background-color: #0056b3; }
     .shortcut-creator {
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-
-.shortcut-creator input {
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 6px;
-  border: none;
-  width: 200px;
-}
-
-.shortcut-creator button {
-  padding: 10px 20px;
-  font-size: 14px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.shortcut-creator button:hover {
-  background-color: #218838;
-}
-.shortcut-creator {
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-
-.shortcut-creator input {
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 6px;
-  border: none;
-  width: 200px;
-}
-
-.shortcut-creator button {
-  padding: 10px 20px;
-  font-size: 14px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.shortcut-creator button:hover {
-  background-color: #218838;
-}
-
-#shortcuts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.shortcut-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.shortcut-item button {
-  padding: 8px 14px;
-  font-size: 14px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.shortcut-item button:hover {
-  background-color: #0056b3;
-}
-
-.delete-btn {
-  cursor: pointer;
-  color: red;
-  font-size: 18px;
-}
-
-
-    .news-section {
-      background-color: rgba(0,0,0,0.6);
-      padding: 20px;
-      border-radius: 16px;
-      margin-top: 40px;
+      margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
     }
-
-    .news-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
+    .shortcut-creator input {
+      padding: 10px; font-size: 14px; border-radius: 6px; border: none; width: 200px;
     }
-
-    .news-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
-      transition: opacity 0.5s ease;
+    .shortcut-creator button {
+      padding: 10px 20px; font-size: 14px; background-color: #28a745; color: white;
+      border: none; border-radius: 8px; cursor: pointer;
     }
-    .news-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  padding: 0 12px;
-  box-sizing: border-box;
-}
-
-    .news-card {
-  width: 100%;
-  max-width: 320px;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 15px;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s;
-  box-sizing: border-box;
-}
-
-
-    .news-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    .shortcut-creator button:hover { background-color: #218838; }
+    #shortcuts { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+    .shortcut-item { display: flex; align-items: center; gap: 6px; }
+    .shortcut-item button {
+      padding: 8px 14px; font-size: 14px; background-color: #007bff; color: white;
+      border: none; border-radius: 6px; cursor: pointer;
     }
-
-    .news-card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-
-    .news-card h4 {
-      color: white;
-      margin: 10px 0 5px;
-    }
-
-    .news-card p {
-      color: #ccc;
-      font-size: 14px;
-    }
-
-    .news-card a {
-      color: #00ccff;
-      text-decoration: none;
-    }
-
-    .news-card a:hover {
-      text-decoration: underline;
-    }
-
+    .shortcut-item button:hover { background-color: #0056b3; }
+    .delete-btn { cursor: pointer; color: red; font-size: 18px; }
     .widgets {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-      background-color: rgba(255, 255, 255, 0.08);
-      padding: 10px;
-      border-radius: 12px;
-      backdrop-filter: blur(6px);
-      z-index: 100;
+      position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px;
+      background-color: rgba(255,255,255,0.08); padding: 10px; border-radius: 12px;
+      backdrop-filter: blur(6px); z-index: 100;
     }
-
     .widget-item {
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 10px 12px;
-      border-radius: 8px;
-      font-size: 18px;
-      cursor: pointer;
+      padding: 10px 12px; border-radius: 8px; font-size: 18px; cursor: pointer;
+      background: rgba(255,255,255,0.1);
     }
-
-    .widget-item:hover {
-      background-color: rgba(255, 255, 255, 0.3);
+    .widget-item:hover { background: rgba(255,255,255,0.3); }
+    .bg-menu {
+      position: fixed; bottom: 70px; right: 20px; background: rgba(0,0,0,0.8);
+      padding: 15px; border-radius: 12px; display: none; flex-direction: column;
+      gap: 10px; color: white; width: 260px; z-index: 9999;
     }
-
-    @media (max-width: 768px) {
-  .navbar { flex-direction: column; align-items: center; }
-  .welcome { font-size: 28px; }
-  .news-card { width: 95%; }
-  .toggle-btn { font-size: 14px; padding: 8px 12px; top: 10px; right: 10px; }
-  .shortcut-creator input { width: 100%; max-width: 250px; }
-  .button-group button { font-size: 14px; padding: 8px 12px; }
-}
-      .welcome { font-size: 32px; }
-      .news-card { width: 90%; }
-    
+    .bg-menu input { padding: 8px; border-radius: 6px; border: none; width: 100%; }
+    .bg-menu button { padding: 8px 12px; border: none; border-radius: 8px; background: #00ccff; color: white; cursor: pointer; }
+    .bg-menu button:hover { background: #0099cc; }
+    .preset-bg { display: flex; gap: 6px; flex-wrap: wrap; }
   </style>
 </head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <body>
-  <video autoplay muted loop id="bgVideo">
-  <source src="https://motionbgs.com/media/6058/school-girl-gura.960x540.mp4" type="video/mp4" />
-</video>
+  <video autoplay muted loop id="bgVideo"></video>
+  <div id="yt-bg"></div>
 
-<button class="toggle-btn" onclick="toggleVideo()">🌀 Ẩn/Hiện nền</button>
+  <button class="toggle-btn" onclick="toggleVideo()">Ẩn/Hiện nền</button>
 
-  <div class="navbar" style="flex-direction: column; align-items: center;">
-  <h1 class="webcuatoi">WEB ĐA NĂNG (BETA)</h1>
-  <h1 class="creatby">Được làm bởi Anh Kiệt</h1>
-  <h1 class="creatby">Gmail: anhkietson3@gmail.com</h1>
-  <div class="search-container" style="margin-top: 12px; width: 100%; max-width: 400px;">
-    <input type="text" id="tuKhoa" placeholder="Tìm kiếm với Google..."
-           oninput="goiYTuKhoa()" onkeydown="return xuLyPhim(event)">
-    <ul id="suggestions" class="suggestions-box"></ul>
-  </div>
-</div>
-<div class="shortcut-creator">
-  <input type="text" id="shortcutName" placeholder="Tên lối tắt">
-  <input type="url" id="shortcutURL" placeholder="Đường dẫn (URL)">
-  <button onclick="addShortcut()">➕ Thêm lối tắt</button>
-</div>
-
-<div id="shortcuts" class="button-group"></div>
-
-<div id="shortcuts"></div>
-
-
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <h1 class="webcuatoi">WEB ĐA NĂNG (BETA)</h1>
+    <h1 class="creatby">Được làm bởi Anh Kiệt</h1>
+    <h1 class="creatby">Gmail: anhkietson3@gmail.com</h1>
+    <div class="search-container">
+      <input type="text" id="tuKhoa" placeholder="Tìm kiếm với Google..."
+        oninput="goiYTuKhoa()" onkeydown="return xuLyPhim(event)">
+      <ul id="suggestions" class="suggestions-box"></ul>
+    </div>
   </div>
 
+  <!-- SHORTCUT -->
+  <div class="shortcut-creator">
+    <input type="text" id="shortcutName" placeholder="Tên lối tắt">
+    <input type="url" id="shortcutURL" placeholder="Đường dẫn (URL)">
+    <button onclick="addShortcut()">➕ Thêm lối tắt</button>
+  </div>
+  <div id="shortcuts" class="button-group"></div>
+
+  <!-- MENU ĐỔI NỀN -->
+  <div id="bgMenu" class="bg-menu">
+    <h4>🎨 Tuỳ chỉnh nền</h4>
+    <input type="url" id="bgUrl" placeholder="Dán link ảnh / video..." />
+    <button onclick="setCustomBg()">Áp dụng</button>
+    <input type="file" id="bgFile" accept="image/*,video/mp4" onchange="uploadBg(event)" />
+    <div class="preset-bg">
+      <button onclick="setBg('https://i.pinimg.com/1200x/a2/fe/21/a2fe21da9ce7d1698f5b48cdb506c853.jpg')">Ảnh 1</button>
+      <button onclick="setBg('https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif')">GIF</button>
+      <button onclick="setBg('https://www.w3schools.com/html/mov_bbb.mp4')">MP4</button>
+      <button onclick="setBg('https://youtu.be/qAZVnSc0IpI')">YouTube</button>
+    </div>
+    <button onclick="resetBg()" style="background:red">❌ Reset</button>
+  </div>
+    <!-- AI Widget -->
+<div id="aiBox" style="position:fixed; bottom:80px; left:20px; background:rgba(0,0,0,0.9); color:white; padding:15px; border-radius:12px; width:300px; display:none; flex-direction:column; gap:10px; z-index:9999;">
+  <h4>🤖 Hỏi AI</h4>
+  <textarea id="aiInput" rows="2" placeholder="Nhập câu hỏi..." style="width:100%; border-radius:6px; padding:6px;"></textarea>
+  <button onclick="askAI()" style="padding:6px; border:none; border-radius:6px; background:#00ccff; color:white;">Gửi</button>
+  <div id="aiAnswer" style="margin-top:10px; font-size:14px; min-height:30px;"></div>
+</div>
+
+    <!-- Update Log Box -->
+<div id="updateLog" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  background:rgba(0,0,0,0.9); color:white; padding:20px; border-radius:12px; width:400px;
+  max-height:70vh; overflow-y:auto; display:none; z-index:10000;">
+  <h3>📜 Update Log</h3>
+  <div id="updateContent"></div>
+  <button onclick="toggleUpdateLog()" style="margin-top:10px; padding:6px 12px; background:red; border:none; border-radius:6px; color:white;">Đóng</button>
+</div>
+
+  <!-- WIDGETS -->
   <div class="widgets">
     <div class="widget-item" onclick="window.location.href='https://myaccount.google.com/'">⚙️</div>
     <div class="widget-item" onclick="window.location.href='https://mail.google.com'">📨</div>
     <div class="widget-item" onclick="window.location.href='https://www.youtube.com'">🔔</div>
+    <div class="widget-item" onclick="toggleBgMenu()">🎨</div>
+    <div class="widget-item" onclick="toggleAI()">🤖</div>
+    <div class="widget-item" onclick="toggleUpdateLog()">📜</div>
   </div>
 
+  <!-- MAIN -->
   <div class="container">
     <h2 class="welcome">Chào mừng đến với trang web!</h2>
-
     <div class="button-group">
       <button onclick="window.location.href='https://www.roblox.com'">🎮 Roblox</button>
       <button onclick="window.location.href='https://www.youtube.com'">▶️ YouTube</button>
       <button onclick="window.location.href='https://drive.google.com'">📁 Drive</button>
       <button onclick="window.location.href='https://chat.openai.com'">🤖 ChatGPT</button>
       <button onclick="window.location.href='https://translate.google.com'">🌐 Google Dịch</button>
-    </div>
-
-    <div class="news-section">
-      <div class="news-header">
-        <h3>📰 Tin Tức Nổi Bật</h3>
-        <button onclick="lamMoiTin()" style="padding:8px 16px; border-radius: 8px; background-color: #00ccff; color: white; border: none;">🔁 Làm mới</button>
-      </div>
-      <div class="news-grid" id="newsGrid"></div>
+      <button onclick="window.location.href='https://thptmyxuyen.edu.vn'">🎓 Web trường</button>
+      <button onclick="window.location.href='https://vtv.vn/'">kênh viễn thông VN</button>
     </div>
   </div>
 
-  <script>
-    const danhSachGoiY = [
-      "Roblox", "Robux miễn phí", "Blue Archive", "Game AI hay nhất",
-      "Tin tức công nghệ", "Genshin Impact", "YouTube", "Google Dịch",
-      "ChatGPT", "Tạo trang web đơn giản", "Lập trình web cơ bản",
-      "Báo tuổi trẻ", "Báo thanh niên", "Laptop giá rẻ", "Laptop gaming giá rẻ"
-    ];
-
-    function goiYTuKhoa() {
-      const input = document.getElementById("tuKhoa");
-      const list = document.getElementById("suggestions");
-      const tuKhoa = input.value.toLowerCase().trim();
-      list.innerHTML = "";
-
-      if (tuKhoa === "") {
-        list.style.display = "none";
-        return;
-      }
-
-      const ketQua = danhSachGoiY.filter(g =>
-        g.toLowerCase().includes(tuKhoa)
-      );
-
-      if (ketQua.length === 0) {
-        list.style.display = "none";
-        return;
-      }
-
-      ketQua.forEach(k => {
-        const li = document.createElement("li");
-        li.textContent = k;
-        li.onclick = () => {
-          input.value = k;
-          list.innerHTML = "";
-          timKiemGoogle();
-        };
-        list.appendChild(li);
-      });
-
-      list.style.display = "block";
-    }
-
-    function xuLyPhim(e) {
-      if (e.key === "Enter") {
-        timKiemGoogle();
-        return false;
-      }
-      return true;
-    }
-
-    function timKiemGoogle() {
-      const tuKhoa = document.getElementById("tuKhoa").value.trim();
-      if (tuKhoa !== "") {
-        const link = "https://www.google.com/search?q=" + encodeURIComponent(tuKhoa);
-        window.open(link, "_blank");
-      }
-      document.getElementById("suggestions").style.display = "none";
-      return false;
-    }
-    function toggleVideo() {
-  const video = document.getElementById("bgVideo");
-  video.style.display = video.style.display === "none" ? "block" : "none";
+<script>
+// =================== SEARCH ===================
+const danhSachGoiY=["Roblox","Robux miễn phí","Blue Archive","Game AI","Tin tức công nghệ","Genshin Impact","YouTube","Google Dịch","ChatGPT"];
+function goiYTuKhoa(){
+  const input=document.getElementById("tuKhoa"); const list=document.getElementById("suggestions");
+  const tuKhoa=input.value.toLowerCase().trim(); list.innerHTML="";
+  if(!tuKhoa){list.style.display="none";return;}
+  const ketQua=danhSachGoiY.filter(g=>g.toLowerCase().includes(tuKhoa));
+  if(!ketQua.length){list.style.display="none";return;}
+  ketQua.forEach(k=>{const li=document.createElement("li"); li.textContent=k; li.onclick=()=>{input.value=k; list.innerHTML=""; timKiemGoogle();}; list.appendChild(li);});
+  list.style.display="block";
 }
-let shortcuts = JSON.parse(localStorage.getItem("shortcuts") || "[]");
+function xuLyPhim(e){if(e.key==="Enter"){timKiemGoogle();return false;}return true;}
+function timKiemGoogle(){const tuKhoa=document.getElementById("tuKhoa").value.trim(); if(tuKhoa){window.open("https://www.google.com/search?q="+encodeURIComponent(tuKhoa),"_blank");} document.getElementById("suggestions").style.display="none"; return false;}
 
-function addShortcut() {
-  const name = document.getElementById("shortcutName").value.trim();
-  const url = document.getElementById("shortcutURL").value.trim();
-  if (!name || !url) {
-    alert("Vui lòng nhập cả tên và đường dẫn!");
-    return;
-  }
+// =================== SHORTCUT ===================
+let shortcuts=JSON.parse(localStorage.getItem("shortcuts")||"[]");
+function addShortcut(){const name=document.getElementById("shortcutName").value.trim(); const url=document.getElementById("shortcutURL").value.trim(); if(!name||!url){alert("Nhập đủ tên + link!");return;} shortcuts.push({name,url}); localStorage.setItem("shortcuts",JSON.stringify(shortcuts)); renderShortcuts(); document.getElementById("shortcutName").value=""; document.getElementById("shortcutURL").value="";}
+function deleteShortcut(i){if(confirm("Xoá lối tắt?")){shortcuts.splice(i,1); localStorage.setItem("shortcuts",JSON.stringify(shortcuts)); renderShortcuts();}}
+function renderShortcuts(){const c=document.getElementById("shortcuts"); c.innerHTML=""; shortcuts.forEach((s,i)=>{const w=document.createElement("div"); w.className="shortcut-item"; const b=document.createElement("button"); b.textContent=s.name; b.onclick=()=>window.open(s.url,"_blank"); const d=document.createElement("span"); d.className="delete-btn"; d.textContent="❌"; d.onclick=()=>deleteShortcut(i); w.appendChild(b); w.appendChild(d); c.appendChild(w);});}
+document.addEventListener("DOMContentLoaded",renderShortcuts);
 
-  shortcuts.push({ name, url });
-  localStorage.setItem("shortcuts", JSON.stringify(shortcuts));
-  renderShortcuts();
+// =================== BACKGROUND ===================
+function toggleVideo(){const v=document.getElementById("bgVideo"); v.style.display=v.style.display==="none"?"block":"none";}
+function toggleBgMenu(){const m=document.getElementById("bgMenu"); m.style.display=m.style.display==="flex"?"none":"flex";}
 
-  document.getElementById("shortcutName").value = "";
-  document.getElementById("shortcutURL").value = "";
+function setBg(url){applyBg(url); saveBg(url);}
+function setCustomBg(){const url=document.getElementById("bgUrl").value.trim(); if(!url) return; applyBg(url); saveBg(url);}
+function resetBg(){clearBg(); location.reload();}
+
+// ========== IndexedDB để lưu nền lớn ==========
+let db;
+const request=indexedDB.open("bgDB",1);
+request.onupgradeneeded=e=>{db=e.target.result; db.createObjectStore("bg",{keyPath:"id"});}
+request.onsuccess=e=>{db=e.target.result; loadBg();}
+function saveBg(data){if(!db) return; const tx=db.transaction("bg","readwrite"); tx.objectStore("bg").put({id:1,url:data});}
+function loadBg(){if(!db) return; const tx=db.transaction("bg","readonly"); const req=tx.objectStore("bg").get(1); req.onsuccess=()=>{if(req.result) applyBg(req.result.url);};}
+function clearBg(){if(!db) return; const tx=db.transaction("bg","readwrite"); tx.objectStore("bg").delete(1);}
+
+function uploadBg(e){const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=function(ev){const url=ev.target.result; applyBg(url); saveBg(url);}; r.readAsDataURL(f);}
+
+function applyBg(url){const v=document.getElementById("bgVideo"); const yt=document.getElementById("yt-bg");
+  if(url.includes("youtube.com")||url.includes("youtu.be")){v.style.display="none"; document.body.style.backgroundImage=""; yt.innerHTML=`<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${extractYoutubeId(url)}?autoplay=1&mute=1&loop=1&playlist=${extractYoutubeId(url)}&controls=0&modestbranding=1" frameborder="0" allow="autoplay; fullscreen" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></iframe>`;}
+  else if(url.endsWith(".mp4")||url.startsWith("data:video")){yt.innerHTML=""; v.src=url; v.style.display="block"; document.body.style.backgroundImage="";}
+  else if(url.match(/\.(jpg|jpeg|png|gif)$/i) || url.startsWith("data:image")){yt.innerHTML=""; v.style.display="none"; document.body.style.backgroundImage=`url(${url})`; document.body.style.backgroundSize="cover"; document.body.style.backgroundPosition="center"; document.body.style.backgroundAttachment="fixed";}
+}
+function extractYoutubeId(url){const regExp=/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/; const match=url.match(regExp); return (match&&match[2].length===11)?match[2]:null;}
+
+//-------AI
+const OPENAI_API_KEY = "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"; 
+
+function toggleAI(){
+  const box=document.getElementById("aiBox");
+  box.style.display=box.style.display==="flex"?"none":"flex";
 }
 
-function deleteShortcut(index) {
-  if (!confirm("Bạn có chắc muốn xoá lối tắt này?")) return;
-  shortcuts.splice(index, 1);
-  localStorage.setItem("shortcuts", JSON.stringify(shortcuts));
-  renderShortcuts();
-}
+async function askAI(){
+  const q=document.getElementById("aiInput").value.trim();
+  const a=document.getElementById("aiAnswer");
+  if(!q){a.innerHTML="❌ Bạn chưa nhập câu hỏi."; return;}
+  a.innerHTML="⏳ Đang suy nghĩ...";
 
-function renderShortcuts() {
-  const container = document.getElementById("shortcuts");
-  container.innerHTML = "";
-  shortcuts.forEach((shortcut, index) => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "shortcut-item";
-
-    const btn = document.createElement("button");
-    btn.textContent = shortcut.name;
-    btn.onclick = () => window.open(shortcut.url, "_blank");
-
-    const del = document.createElement("span");
-    del.className = "delete-btn";
-    del.textContent = "❌";
-    del.onclick = () => deleteShortcut(index);
-
-    wrapper.appendChild(btn);
-    wrapper.appendChild(del);
-    container.appendChild(wrapper);
-  });
-}
-  
-document.addEventListener("DOMContentLoaded", renderShortcuts);
-
-function renderShortcuts() {
-  const container = document.getElementById("shortcuts");
-  if (!container) return; // phòng khi phần tử chưa tồn tại
-
-  container.innerHTML = "";
-  shortcuts.forEach((shortcut, index) => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "shortcut-item";
-
-    const btn = document.createElement("button");
-    btn.textContent = shortcut.name;
-    btn.onclick = () => window.open(shortcut.url, "_blank");
-
-    const del = document.createElement("span");
-    del.className = "delete-btn";
-    del.textContent = "❌";
-    del.onclick = () => deleteShortcut(index);
-
-    wrapper.appendChild(btn);
-    wrapper.appendChild(del);
-    container.appendChild(wrapper);
-  });
-}
-
-
-
-    const tinTucData = [
-      {
-        img: "https://i1-vnexpress.vnecdn.net/2025/06/14/GtTjnbRWEAAOMTM-1749913060-1166-1749913127.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=qEMeA-fupsmQNEH-BuThXA",
-        title: "VnExpress - Tin mới",
-        desc: "Cập nhật thời sự, chính trị, đời sống xã hội và quốc tế 24/7.",
-        link: "https://vnexpress.net"
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${OPENAI_API_KEY}`
       },
-      {
-        img: "https://cdn2.tuoitre.vn/thumb_w/730/471584752817336320/2025/6/14/base64-17499108983381276894991.jpeg",
-        title: "Tuổi Trẻ Online",
-        desc: "Báo chính thống với nhiều chủ đề hấp dẫn, từ học đường đến công nghệ.",
-        link: "https://tuoitre.vn"
-      },
-      {
-        img: "https://genk.mediacdn.vn/139269124445442048/2025/6/11/wp-1749541619652203837525155052661-1749649366037-17496493662212124783853-1749651402151-17496514022132083388543.jpg",
-        title: "GenK - Công nghệ",
-        desc: "Trang tin hot nhất về game, phần cứng, AI và chuyển đổi số.",
-        link: "https://genk.vn"
-      },
-      {
-        img: "https://photo.znews.vn/w960/Uploaded/yrfjpysfzyr/2025_06_14/BP.jpg",
-        title: "Zing News - Giải trí",
-        desc: "Tin tức showbiz, âm nhạc, nghệ sĩ nổi bật mỗi ngày.",
-        link: "https://zingnews.vn"
-      }
-    ];
-
-    function lamMoiTin() {
-      const container = document.getElementById("newsGrid");
-      container.style.opacity = 0;
-      setTimeout(() => {
-        const shuffled = tinTucData.sort(() => 0.5 - Math.random()).slice(0, 3);
-        container.innerHTML = "";
-        shuffled.forEach(tin => {
-          const card = document.createElement("div");
-          card.className = "news-card";
-          card.innerHTML = `
-            <img src="${tin.img}" alt="${tin.title}">
-            <h4>${tin.title}</h4>
-            <p>${tin.desc}</p>
-            <a href="${tin.link}" target="_blank">Đọc thêm →</a>
-          `;
-          container.appendChild(card);
-        });
-        container.style.opacity = 1;
-      }, 300);
-    }
-    window.onload = renderShortcuts;
-    window.onload = lamMoiTin;
-    window.addEventListener("click", function (e) {
-      if (!document.querySelector(".search-container").contains(e.target)) {
-        document.getElementById("suggestions").style.display = "none";
-      }
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: [{role: "user", content: q}],
+        max_tokens: 150
+      })
     });
-  </script>
-  
+    const data = await response.json();
+    if(data.choices && data.choices[0]){
+      a.innerHTML="💡 "+data.choices[0].message.content;
+    } else {
+      a.innerHTML="⚠️ Không nhận được phản hồi từ AI.";
+    }
+  } catch(err){
+    a.innerHTML="❌ Lỗi: "+err.message;
+  }
+}
+
+//======UPDATELOG
+const updateData = [
+  {version: "v1.0", date: "2025-07-18", desc: "🚀 ra mắt giao diện + tìm kiếm gg + shortcuts"},
+  {version: "v1.1.2", date: "2025-09-04", desc: "🎨 Thêm chức năng đổi nền (ảnh, gif, video, YouTube)."},
+  {version: "v1.3", date: "2025-09-05", desc: "🤖 Thêm widget hỏi AI (bản dùng API OpenAI)."},
+  {version: "v1.31", date: "2025-09-05", desc: "📝 thay đổi bỏ phần báo trí tạo thành lối tắt viễn thông Việt Nam."}
+];
+
+function toggleUpdateLog(){
+  const box = document.getElementById("updateLog");
+  if(box.style.display==="none" || !box.style.display){
+    renderUpdateLog();
+    box.style.display="block";
+  } else {
+    box.style.display="none";
+  }
+}
+
+function renderUpdateLog(){
+  const content=document.getElementById("updateContent");
+  content.innerHTML="";
+  updateData.forEach(u=>{
+    content.innerHTML += `
+      <div style="margin-bottom:12px;">
+        <strong>${u.version}</strong> - <em>${u.date}</em><br>
+        <span>${u.desc}</span>
+      </div>
+    `;
+  });
+}
+
+</script>
 </body>
 </html>
