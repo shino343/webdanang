@@ -186,11 +186,11 @@
     <button onclick="resetBg()" style="background:red">❌ Reset</button>
   </div>
     <!-- AI Widget -->
-<div id="aiBox" style="position:fixed; bottom:80px; left:20px; background:rgba(0,0,0,0.9); color:white; padding:15px; border-radius:12px; width:300px; display:none; flex-direction:column; gap:10px; z-index:9999;">
-  <h4>🤖 Hỏi AI</h4>
-  <textarea id="aiInput" rows="2" placeholder="Nhập câu hỏi..." style="width:100%; border-radius:6px; padding:6px;"></textarea>
-  <button onclick="askAI()" style="padding:6px; border:none; border-radius:6px; background:#00ccff; color:white;">Gửi</button>
-  <div id="aiAnswer" style="margin-top:10px; font-size:14px; min-height:30px;"></div>
+<div id="aiBox" style="position:fixed; bottom:80px; right:20px; background:rgba(0,0,0,0.8);
+  color:white; padding:10px; border-radius:8px; width:300px; display:none;">
+  <div id="aiChat" style="max-height:200px; overflow-y:auto; font-size:14px; margin-bottom:6px;"></div>
+  <input id="aiInput" type="text" placeholder="Hỏi gì đi..." style="width:70%; padding:5px;">
+  <button onclick="askAI()" style="padding:5px;">Gửi</button>
 </div>
 
     <!-- Update Log Box -->
@@ -341,4 +341,5 @@ function renderUpdateLog(){
 </script>
 </body>
 </html>
+
 
