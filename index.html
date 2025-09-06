@@ -1,151 +1,131 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Web Đa Năng (beta)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
+    :root{
+      --glass: rgba(255,255,255,0.06);
+      --accent: #00aaff;
+      --muted: #9aa4ae;
+      --card-bg: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      color: gray;
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      color: #e6eef6;
       min-height: 100vh;
       overflow-x: hidden;
+      background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
     }
+
+    /* BACKGROUND VIDEO / YT */
     #bgVideo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -1;
-      opacity: 0.75;
-      pointer-events: none;
-      filter: brightness(1.1) saturate(1.1);
-      transition: opacity 1s ease;
+      position: fixed; top:0; left:0; width:100vw; height:100vh;
+      object-fit: cover; z-index:-2; opacity:0.8; pointer-events:none;
+      filter: brightness(1.05) saturate(1.05);
+      transition: opacity .6s ease;
     }
-    .toggle-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 999;
-      background-color: rgba(0,0,0,0.5);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 16px;
-      cursor: pointer;
-      font-size: 16px;
+    #yt-bg { position:fixed; inset:0; z-index:-3; pointer-events:none; }
+
+    /* TOGGLE */
+    .toggle-btn{
+      position:fixed; top:20px; right:20px; z-index:9999;
+      background: rgba(0,0,0,0.6); color:#fff; border:none; border-radius:10px;
+      padding:10px 14px; cursor:pointer; font-size:15px; backdrop-filter: blur(4px);
     }
-    .navbar {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 12px 24px;
-      border-radius: 16px;
-      max-width: 90%;
-      margin: 20px auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+
+    /* NAVBAR */
+    .navbar{
+      background: linear-gradient(135deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+      padding: 14px 18px; border-radius:14px; max-width:1000px; margin:20px auto;
+      display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.6);
     }
-    .webcuatoi {
-      font-size: 42px;
-      color: #ffffff;
-      text-shadow: 2px 2px 6px rgb(255, 255, 255);
-      margin-bottom: 10px;
+    .brand {
+      display:flex; flex-direction:column;
     }
-    .creatby {
-      font-size: 12px;
-      color: darksalmon;
-      margin-bottom: 6px;
-    }
-    .search-container {
-      position: relative;
-      width: 98%;
-      max-width: 400px;
-      margin-top: 10px;
-    }
+    .webcuatoi { font-size:28px; color:#fff; margin:0; letter-spacing:1px; text-shadow:0 6px 24px rgba(0,0,0,0.4) }
+    .creatby { font-size:12px; color: darksalmon; margin-top:4px; opacity:.95; }
+
+    .search-container { position:relative; width:320px; }
     #tuKhoa {
-      width: 100%;
-      padding: 10px 16px;
-      border-radius: 20px;
-      border: none;
-      font-size: 16px;
+      width:100%; padding:10px 14px; border-radius:22px; border:none; outline:none;
+      font-size:15px; background: rgba(255,255,255,0.06); color:#fff;
     }
     .suggestions-box {
-      position: absolute;
-      top: 42px;
-      width: 100%;
-      background: white;
-      color: black;
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      max-height: 200px;
-      overflow-y: auto;
-      display: none;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      z-index: 10;
+      position:absolute; top:44px; left:0; right:0; background:#fff; color:#111;
+      border-radius:0 0 10px 10px; box-shadow:0 8px 24px rgba(0,0,0,0.25);
+      max-height:220px; overflow:auto; display:none; z-index:30; padding:0; margin:0; list-style:none;
     }
-    .suggestions-box li { padding: 10px; cursor: pointer; }
-    .suggestions-box li:hover { background-color: #f0f0f0; }
-    .container {
-      max-width: 960px;
-      margin: auto;
-      padding: 40px 20px;
-      text-align: center;
+    .suggestions-box li { padding:10px 12px; cursor:pointer; border-bottom:1px solid #f0f0f0; }
+    .suggestions-box li:hover{ background:#f3f6fb; }
+
+    /* SHORTCUTS */
+    .shortcut-creator{ max-width:1000px; margin:14px auto; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+    .shortcut-creator input[type="text"], .shortcut-creator input[type="url"]{
+      padding:10px; border-radius:8px; border:none; background: rgba(255,255,255,0.04); color:#fff; width:220px;
     }
-    .welcome { font-size: 42px; margin-bottom: 20px; color: black; }
-    .button-group {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin: 30px 0;
-    }
-    .button-group button {
-      padding: 10px 20px; font-size: 16px; background-color: #007bff;
-      border: none; border-radius: 8px; color: white; cursor: pointer;
-    }
-    .button-group button:hover { background-color: #0056b3; }
-    .shortcut-creator {
-      margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
-    }
-    .shortcut-creator input {
-      padding: 10px; font-size: 14px; border-radius: 6px; border: none; width: 200px;
-    }
-    .shortcut-creator button {
-      padding: 10px 20px; font-size: 14px; background-color: #28a745; color: white;
-      border: none; border-radius: 8px; cursor: pointer;
-    }
-    .shortcut-creator button:hover { background-color: #218838; }
-    #shortcuts { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
-    .shortcut-item { display: flex; align-items: center; gap: 6px; }
-    .shortcut-item button {
-      padding: 8px 14px; font-size: 14px; background-color: #007bff; color: white;
-      border: none; border-radius: 6px; cursor: pointer;
-    }
-    .shortcut-item button:hover { background-color: #0056b3; }
-    .delete-btn { cursor: pointer; color: red; font-size: 18px; }
+    .shortcut-creator button{ padding:10px 14px; border-radius:8px; border:none; background:#28a745; color:white; cursor:pointer; }
+    #shortcuts { max-width:1000px; margin:12px auto; display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+
+    .shortcut-item { display:flex; gap:8px; align-items:center; }
+    .shortcut-item button { padding:8px 12px; border-radius:8px; border:none; background:var(--accent); color:white; cursor:pointer; }
+    .delete-btn { cursor:pointer; color:#ff6b6b; font-size:18px; user-select:none; }
+
+    /* WIDGETS */
     .widgets {
-      position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px;
-      background-color: rgba(255,255,255,0.08); padding: 10px; border-radius: 12px;
-      backdrop-filter: blur(6px); z-index: 100;
+      position:fixed; bottom:20px; right:20px; display:flex; gap:10px; padding:8px; border-radius:12px;
+      background: rgba(255,255,255,0.04); backdrop-filter: blur(6px); z-index:999;
     }
-    .widget-item {
-      padding: 10px 12px; border-radius: 8px; font-size: 18px; cursor: pointer;
-      background: rgba(255,255,255,0.1);
+    .widget-item { padding:8px 10px; border-radius:8px; font-size:18px; cursor:pointer; background:rgba(255,255,255,0.02); }
+    .widget-item:hover { background: rgba(255,255,255,0.08); }
+
+    .bg-menu{
+      position:fixed; bottom:70px; right:20px; background: rgba(0,0,0,0.82); padding:12px; border-radius:12px; display:none;
+      flex-direction:column; gap:10px; color:white; width:300px; z-index:9999;
     }
-    .widget-item:hover { background: rgba(255,255,255,0.3); }
-    .bg-menu {
-      position: fixed; bottom: 70px; right: 20px; background: rgba(0,0,0,0.8);
-      padding: 15px; border-radius: 12px; display: none; flex-direction: column;
-      gap: 10px; color: white; width: 260px; z-index: 9999;
+    .bg-menu input[type="url"], .bg-menu input[type="file"]{ padding:8px; border-radius:8px; border:none; width:100%; background:#111; color:#fff; }
+
+    /* UPDATE LOG */
+    #updateLog{ position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.9);
+      color:white; padding:18px; border-radius:12px; width:420px; max-height:72vh; overflow:auto; display:none; z-index:10000;
     }
-    .bg-menu input { padding: 8px; border-radius: 6px; border: none; width: 100%; }
-    .bg-menu button { padding: 8px 12px; border: none; border-radius: 8px; background: #00ccff; color: white; cursor: pointer; }
-    .bg-menu button:hover { background: #0099cc; }
-    .preset-bg { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    /* MAIN */
+    .container{ max-width:1000px; margin:28px auto; padding:18px; display:flex; flex-direction:column; gap:18px; }
+    .welcome{ font-size:34px; color:#fff; margin:0 0 8px 0; text-align:center; }
+
+    .button-group{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+    .button-group button { padding:10px 16px; border-radius:10px; border:none; background:var(--accent); color:#001; cursor:pointer; font-weight:600; }
+
+    /* Sections */
+    .section-card { background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.45); }
+    .section-title { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:10px; }
+    .grid-videos { display:flex; gap:12px; flex-wrap:wrap; }
+    .video-card { width:300px; background:var(--card-bg); border-radius:10px; overflow:hidden; cursor:pointer; transition:transform .2s; }
+    .video-card:hover{ transform:translateY(-6px); }
+    .video-thumb{ width:100%; display:block; height:170px; object-fit:cover; }
+    .video-info{ padding:10px; font-size:14px; color: #e6eef6; }
+
+    .music-list{ display:flex; flex-direction:column; gap:10px; max-width:720px; }
+    .music-item{ background:var(--card-bg); padding:10px; border-radius:10px; display:flex; gap:12px; align-items:center; justify-content:space-between; }
+    .music-item .meta{ flex:1; }
+    .music-item button{ background:transparent; border:1px solid rgba(255,255,255,0.08); color:#fff; padding:8px 10px; border-radius:8px; cursor:pointer; }
+
+    /* responsive */
+    @media (max-width:760px){
+      .navbar{ padding:12px; gap:8px; }
+      .search-container{ width:100%; max-width:360px; }
+      .video-card{ width:48%; }
+    }
   </style>
 </head>
 <body>
+  <!-- background elements -->
   <video autoplay muted loop id="bgVideo"></video>
   <div id="yt-bg"></div>
 
@@ -153,193 +133,463 @@
 
   <!-- NAVBAR -->
   <div class="navbar">
-    <h1 class="webcuatoi">WEB ĐA NĂNG (BETA)</h1>
-    <h1 class="creatby">Được làm bởi Anh Kiệt</h1>
-    <h1 class="creatby">Gmail: anhkietson3@gmail.com</h1>
+    <div class="brand">
+      <div class="webcuatoi">WEB ĐA NĂNG (BETA)</div>
+      <div class="creatby">Được làm bởi Anh Kiệt &nbsp;•&nbsp; anhkietson3@gmail.com</div>
+    </div>
+
     <div class="search-container">
-      <input type="text" id="tuKhoa" placeholder="Tìm kiếm với Google..."
-        oninput="goiYTuKhoa()" onkeydown="return xuLyPhim(event)">
+      <input type="text" id="tuKhoa" placeholder="Tìm kiếm với Google..." oninput="goiYTuKhoa()" onkeydown="return xuLyPhim(event)">
       <ul id="suggestions" class="suggestions-box"></ul>
     </div>
   </div>
 
-  <!-- SHORTCUT -->
+  <!-- SHORTCUT CREATOR -->
   <div class="shortcut-creator">
     <input type="text" id="shortcutName" placeholder="Tên lối tắt">
     <input type="url" id="shortcutURL" placeholder="Đường dẫn (URL)">
     <button onclick="addShortcut()">➕ Thêm lối tắt</button>
   </div>
-  <div id="shortcuts" class="button-group"></div>
 
-  <!-- MENU ĐỔI NỀN -->
+  <!-- SHORTCUTS LIST -->
+  <div id="shortcuts"></div>
+
+  <!-- BG MENU -->
   <div id="bgMenu" class="bg-menu">
     <h4>🎨 Tuỳ chỉnh nền</h4>
-    <input type="url" id="bgUrl" placeholder="Dán link ảnh / video..." />
-    <button onclick="setCustomBg()">Áp dụng</button>
+    <input type="url" id="bgUrl" placeholder="Dán link ảnh / GIF / video / YouTube..." />
+    <div style="display:flex; gap:8px;">
+      <button onclick="setCustomBg()">Áp dụng</button>
+      <button onclick="document.getElementById('bgFile').click()" style="background:#666">Upload</button>
+      <button onclick="resetBg()" style="background:#b33">❌ Reset</button>
+    </div>
     <input type="file" id="bgFile" accept="image/*,video/mp4" onchange="uploadBg(event)" />
-    <div class="preset-bg">
-      <button onclick="setBg('https://i.pinimg.com/1200x/a2/fe/21/a2fe21da9ce7d1698f5b48cdb506c853.jpg')">Ảnh 1</button>
+    <div class="preset-bg" style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+      <button onclick="setBg('https://i.pinimg.com/1200x/a2/fe/21/a2fe21da9ce7d1698f5b48cdb506c853.jpg')">Ảnh</button>
       <button onclick="setBg('https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif')">GIF</button>
       <button onclick="setBg('https://www.w3schools.com/html/mov_bbb.mp4')">MP4</button>
       <button onclick="setBg('https://youtu.be/qAZVnSc0IpI')">YouTube</button>
     </div>
-    <button onclick="resetBg()" style="background:red">❌ Reset</button>
   </div>
-    <!-- AI Widget -->
-<div id="aiBox" style="position:fixed; bottom:80px; right:20px; background:rgba(0,0,0,0.8);
-  color:white; padding:10px; border-radius:8px; width:300px; display:none;">
-  <div id="aiChat" style="max-height:200px; overflow-y:auto; font-size:14px; margin-bottom:6px;"></div>
-  <input id="aiInput" type="text" placeholder="Hỏi gì đi..." style="width:70%; padding:5px;">
-  <button onclick="askAI()" style="padding:5px;">Gửi</button>
-</div>
 
-    <!-- Update Log Box -->
-<div id="updateLog" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-  background:rgba(0,0,0,0.9); color:white; padding:20px; border-radius:12px; width:400px;
-  max-height:70vh; overflow-y:auto; display:none; z-index:10000;">
-  <h3>📜 Update Log</h3>
-  <div id="updateContent"></div>
-  <button onclick="toggleUpdateLog()" style="margin-top:10px; padding:6px 12px; background:red; border:none; border-radius:6px; color:white;">Đóng</button>
-</div>
+  <!-- Update Log modal -->
+  <div id="updateLog">
+    <h3>📜 Update Log</h3>
+    <div id="updateContent" style="line-height:1.5"></div>
+    <div style="text-align:right; margin-top:12px;">
+      <button onclick="toggleUpdateLog()" style="background:#c0392b; color:white; padding:8px 10px; border-radius:8px; border:none;">Đóng</button>
+    </div>
+  </div>
 
   <!-- WIDGETS -->
   <div class="widgets">
-    <div class="widget-item" onclick="window.location.href='https://myaccount.google.com/'">⚙️</div>
-    <div class="widget-item" onclick="window.location.href='https://mail.google.com'">📨</div>
-    <div class="widget-item" onclick="window.location.href='https://www.youtube.com'">🔔</div>
+    <div class="widget-item" onclick="window.open('https://myaccount.google.com/','_blank')">⚙️</div>
+    <div class="widget-item" onclick="window.open('https://mail.google.com','_blank')">📨</div>
+    <div class="widget-item" onclick="window.open('https://www.youtube.com','_blank')">🔔</div>
     <div class="widget-item" onclick="toggleBgMenu()">🎨</div>
-    <div class="widget-item" onclick="toggleAI()">🤖</div>
     <div class="widget-item" onclick="toggleUpdateLog()">📜</div>
   </div>
 
   <!-- MAIN -->
   <div class="container">
     <h2 class="welcome">Chào mừng đến với trang web!</h2>
+
     <div class="button-group">
-      <button onclick="window.location.href='https://www.roblox.com'">🎮 Roblox</button>
-      <button onclick="window.location.href='https://www.youtube.com'">▶️ YouTube</button>
-      <button onclick="window.location.href='https://drive.google.com'">📁 Drive</button>
-      <button onclick="window.location.href='https://chat.openai.com'">🤖 ChatGPT</button>
-      <button onclick="window.location.href='https://translate.google.com'">🌐 Google Dịch</button>
-      <button onclick="window.location.href='https://thptmyxuyen.edu.vn'">🎓 Web trường</button>
-      <button onclick="window.location.href='https://vtv.vn/'">kênh viễn thông VN</button>
+      <button onclick="window.open('https://www.roblox.com','_blank')">🎮 Roblox</button>
+      <button onclick="window.open('https://www.youtube.com','_blank')">▶️ YouTube</button>
+      <button onclick="window.open('https://drive.google.com','_blank')">📁 Drive</button>
+      <button onclick="window.open('https://chat.openai.com','_blank')">🤖 ChatGPT</button>
+      <button onclick="window.open('https://translate.google.com','_blank')">🌐 Google Dịch</button>
+      <button onclick="window.open('https://thptmyxuyen.edu.vn','_blank')">🎓 Web trường</button>
+      <button onclick="window.open('https://vtv.vn/','_blank')">📺 Viễn thông VN</button>
     </div>
+
+    <!-- Video Section -->
+    <div class="section-card">
+      <div class="section-title">
+        <h3 style="margin:0">🎬 Đề xuất Video</h3>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <input id="videoQuery" placeholder="Từ khóa (vd: lofi, chill, edm)" style="padding:8px; border-radius:8px; border:none; background:#0b1220; color:#fff;" />
+          <button onclick="refreshVideos()">🔄 Refresh</button>
+        </div>
+      </div>
+
+      <div id="playerWrap" style="margin-bottom:12px;">
+        <!-- player iframe sẽ load ở đây khi click video -->
+        <iframe id="mainPlayer" width="100%" height="420" src="" frameborder="0" allow="autoplay; encrypted-media" style="border-radius:10px; display:none;"></iframe>
+      </div>
+
+      <div id="videoResults" class="grid-videos"></div>
+    </div>
+
+    <!-- Music Section -->
+    <div class="section-card">
+      <div class="section-title">
+        <h3 style="margin:0">🎵 Đề xuất Nhạc</h3>
+        <div>
+          <button onclick="playAll()" title="Phát tất cả">▶️ Play All</button>
+          <button onclick="stopAll()" title="Dừng tất cả">⏹ Stop</button>
+        </div>
+      </div>
+
+      <div id="musicList" class="music-list"></div>
+    </div>
+
   </div>
 
-<script>
-// =================== SEARCH ===================
-const danhSachGoiY=["Roblox","Robux miễn phí","Blue Archive","Game AI","Tin tức công nghệ","Genshin Impact","YouTube","Google Dịch","ChatGPT"];
-function goiYTuKhoa(){
-  const input=document.getElementById("tuKhoa"); const list=document.getElementById("suggestions");
-  const tuKhoa=input.value.toLowerCase().trim(); list.innerHTML="";
-  if(!tuKhoa){list.style.display="none";return;}
-  const ketQua=danhSachGoiY.filter(g=>g.toLowerCase().includes(tuKhoa));
-  if(!ketQua.length){list.style.display="none";return;}
-  ketQua.forEach(k=>{const li=document.createElement("li"); li.textContent=k; li.onclick=()=>{input.value=k; list.innerHTML=""; timKiemGoogle();}; list.appendChild(li);});
-  list.style.display="block";
-}
-function xuLyPhim(e){if(e.key==="Enter"){timKiemGoogle();return false;}return true;}
-function timKiemGoogle(){const tuKhoa=document.getElementById("tuKhoa").value.trim(); if(tuKhoa){window.open("https://www.google.com/search?q="+encodeURIComponent(tuKhoa),"_blank");} document.getElementById("suggestions").style.display="none"; return false;}
-
-// =================== SHORTCUT ===================
-let shortcuts=JSON.parse(localStorage.getItem("shortcuts")||"[]");
-function addShortcut(){const name=document.getElementById("shortcutName").value.trim(); const url=document.getElementById("shortcutURL").value.trim(); if(!name||!url){alert("Nhập đủ tên + link!");return;} shortcuts.push({name,url}); localStorage.setItem("shortcuts",JSON.stringify(shortcuts)); renderShortcuts(); document.getElementById("shortcutName").value=""; document.getElementById("shortcutURL").value="";}
-function deleteShortcut(i){if(confirm("Xoá lối tắt?")){shortcuts.splice(i,1); localStorage.setItem("shortcuts",JSON.stringify(shortcuts)); renderShortcuts();}}
-function renderShortcuts(){const c=document.getElementById("shortcuts"); c.innerHTML=""; shortcuts.forEach((s,i)=>{const w=document.createElement("div"); w.className="shortcut-item"; const b=document.createElement("button"); b.textContent=s.name; b.onclick=()=>window.open(s.url,"_blank"); const d=document.createElement("span"); d.className="delete-btn"; d.textContent="❌"; d.onclick=()=>deleteShortcut(i); w.appendChild(b); w.appendChild(d); c.appendChild(w);});}
-document.addEventListener("DOMContentLoaded",renderShortcuts);
-
-// =================== BACKGROUND ===================
-function toggleVideo(){const v=document.getElementById("bgVideo"); v.style.display=v.style.display==="none"?"block":"none";}
-function toggleBgMenu(){const m=document.getElementById("bgMenu"); m.style.display=m.style.display==="flex"?"none":"flex";}
-
-function setBg(url){applyBg(url); saveBg(url);}
-function setCustomBg(){const url=document.getElementById("bgUrl").value.trim(); if(!url) return; applyBg(url); saveBg(url);}
-function resetBg(){clearBg(); location.reload();}
-
-// ========== IndexedDB để lưu nền lớn ==========
-let db;
-const request=indexedDB.open("bgDB",1);
-request.onupgradeneeded=e=>{db=e.target.result; db.createObjectStore("bg",{keyPath:"id"});}
-request.onsuccess=e=>{db=e.target.result; loadBg();}
-function saveBg(data){if(!db) return; const tx=db.transaction("bg","readwrite"); tx.objectStore("bg").put({id:1,url:data});}
-function loadBg(){if(!db) return; const tx=db.transaction("bg","readonly"); const req=tx.objectStore("bg").get(1); req.onsuccess=()=>{if(req.result) applyBg(req.result.url);};}
-function clearBg(){if(!db) return; const tx=db.transaction("bg","readwrite"); tx.objectStore("bg").delete(1);}
-
-function uploadBg(e){const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=function(ev){const url=ev.target.result; applyBg(url); saveBg(url);}; r.readAsDataURL(f);}
-
-function applyBg(url){const v=document.getElementById("bgVideo"); const yt=document.getElementById("yt-bg");
-  if(url.includes("youtube.com")||url.includes("youtu.be")){v.style.display="none"; document.body.style.backgroundImage=""; yt.innerHTML=`<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${extractYoutubeId(url)}?autoplay=1&mute=1&loop=1&playlist=${extractYoutubeId(url)}&controls=0&modestbranding=1" frameborder="0" allow="autoplay; fullscreen" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></iframe>`;}
-  else if(url.endsWith(".mp4")||url.startsWith("data:video")){yt.innerHTML=""; v.src=url; v.style.display="block"; document.body.style.backgroundImage="";}
-  else if(url.match(/\.(jpg|jpeg|png|gif)$/i) || url.startsWith("data:image")){yt.innerHTML=""; v.style.display="none"; document.body.style.backgroundImage=`url(${url})`; document.body.style.backgroundSize="cover"; document.body.style.backgroundPosition="center"; document.body.style.backgroundAttachment="fixed";}
-}
-function extractYoutubeId(url){const regExp=/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/; const match=url.match(regExp); return (match&&match[2].length===11)?match[2]:null;}
-
-//-------AI
-function toggleAI(){
-  const box = document.getElementById("aiBox");
-  box.style.display = (box.style.display==="none"||!box.style.display) ? "block" : "none";
-}
-
-async function askAI(){
-  const input = document.getElementById("aiInput");
-  const question = input.value.trim();
-  if(!question) return;
-
-  const chat = document.getElementById("aiChat");
-  chat.innerHTML += `<div><b>Bạn:</b> ${question}</div>`;
-  input.value="";
-
-  try {
-    const res = await fetch("https://your-project.vercel.app/api/ask", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({question})
-    });
-    const data = await res.json();
-    if(data.answer){
-      chat.innerHTML += `<div><b>AI:</b> ${data.answer}</div>`;
-    } else {
-      chat.innerHTML += `<div><b>AI:</b> ⚠️ Có lỗi xảy ra</div>`;
+  <script>
+    // ===================== SEARCH SUGGESTIONS =====================
+    const danhSachGoiY = ["Roblox","Robux miễn phí","Blue Archive","Game AI","Tin tức công nghệ","Genshin Impact","YouTube","Google Dịch","ChatGPT","Lofi chill","Nhạc EDM","Lofi study"];
+    function goiYTuKhoa(){
+      const input = document.getElementById("tuKhoa");
+      const list = document.getElementById("suggestions");
+      const tuKhoa = input.value.toLowerCase().trim();
+      list.innerHTML = "";
+      if(!tuKhoa){ list.style.display = "none"; return; }
+      const ketQua = danhSachGoiY.filter(g => g.toLowerCase().includes(tuKhoa));
+      if(!ketQua.length){ list.style.display = "none"; return; }
+      ketQua.forEach(k => {
+        const li = document.createElement("li");
+        li.textContent = k;
+        li.onclick = ()=>{ input.value = k; list.innerHTML = ""; timKiemGoogle(); };
+        list.appendChild(li);
+      });
+      list.style.display = "block";
     }
-  } catch(err){
-    chat.innerHTML += `<div><b>AI:</b> ❌ Lỗi kết nối server</div>`;
+    function xuLyPhim(e){ if(e.key === "Enter"){ timKiemGoogle(); return false; } return true; }
+    function timKiemGoogle(){ const tuKhoa = document.getElementById("tuKhoa").value.trim(); if(tuKhoa) window.open("https://www.google.com/search?q="+encodeURIComponent(tuKhoa),"_blank"); document.getElementById("suggestions").style.display="none"; return false; }
+
+    // ===================== SHORTCUTS (localStorage) =====================
+    let shortcuts = JSON.parse(localStorage.getItem("shortcuts") || "[]");
+    function addShortcut(){
+      const name = document.getElementById("shortcutName").value.trim();
+      const url = document.getElementById("shortcutURL").value.trim();
+      if(!name || !url){ alert("Nhập đủ tên + link!"); return; }
+      shortcuts.push({name,url});
+      localStorage.setItem("shortcuts", JSON.stringify(shortcuts));
+      renderShortcuts();
+      document.getElementById("shortcutName").value = "";
+      document.getElementById("shortcutURL").value = "";
+    }
+    function deleteShortcut(i){
+      if(!confirm("Xoá lối tắt?")) return;
+      shortcuts.splice(i,1);
+      localStorage.setItem("shortcuts", JSON.stringify(shortcuts));
+      renderShortcuts();
+    }
+    function renderShortcuts(){
+      const c = document.getElementById("shortcuts");
+      c.innerHTML = "";
+      shortcuts.forEach((s,i) => {
+        const w = document.createElement("div");
+        w.className = "shortcut-item";
+        const b = document.createElement("button");
+        b.textContent = s.name;
+        b.onclick = ()=> window.open(s.url,"_blank");
+        const d = document.createElement("span");
+        d.className = "delete-btn";
+        d.textContent = "❌";
+        d.onclick = ()=> deleteShortcut(i);
+        w.appendChild(b); w.appendChild(d);
+        c.appendChild(w);
+      });
+    }
+    document.addEventListener("DOMContentLoaded", renderShortcuts);
+
+    // ===================== BACKGROUND (IndexedDB for storage) =====================
+    function toggleVideo(){ const v = document.getElementById("bgVideo"); v.style.display = (v.style.display === "none" ? "block" : "none"); }
+    function toggleBgMenu(){ const m = document.getElementById("bgMenu"); m.style.display = (m.style.display === "none" || !m.style.display) ? "flex" : "none"; }
+
+    function setBg(url){ applyBg(url); saveBg(url); }
+    function setCustomBg(){ const url = document.getElementById("bgUrl").value.trim(); if(!url) return; applyBg(url); saveBg(url); }
+    function resetBg(){ clearBg(); location.reload(); }
+
+    // IndexedDB
+    let db;
+    const request = indexedDB.open("bgDB",1);
+    request.onupgradeneeded = e => { db = e.target.result; if(!db.objectStoreNames.contains("bg")) db.createObjectStore("bg",{keyPath:"id"}); };
+    request.onsuccess = e => { db = e.target.result; loadBg(); };
+    function saveBg(data){ if(!db) return; const tx = db.transaction("bg","readwrite"); tx.objectStore("bg").put({id:1,url:data}); }
+    function loadBg(){ if(!db) return; const tx = db.transaction("bg","readonly"); const req = tx.objectStore("bg").get(1); req.onsuccess = ()=>{ if(req.result) applyBg(req.result.url); }; }
+    function clearBg(){ if(!db) return; const tx = db.transaction("bg","readwrite"); tx.objectStore("bg").delete(1); }
+
+    function uploadBg(e){
+      const f = e.target.files[0]; if(!f) return;
+      const r = new FileReader();
+      r.onload = function(ev){ const url = ev.target.result; applyBg(url); saveBg(url); };
+      r.readAsDataURL(f);
+    }
+
+    function applyBg(url){
+      const v = document.getElementById("bgVideo");
+      const yt = document.getElementById("yt-bg");
+      if(!url) return;
+      if(url.includes("youtube.com") || url.includes("youtu.be")){
+        v.style.display = "none";
+        document.body.style.backgroundImage = "";
+        const id = extractYoutubeId(url) || url;
+        if(id){
+          yt.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&modestbranding=1" frameborder="0" allow="autoplay; fullscreen" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-3;pointer-events:none;"></iframe>`;
+        }
+      } else if(url.endsWith(".mp4") || url.startsWith("data:video")){
+        yt.innerHTML = "";
+        v.src = url;
+        v.style.display = "block";
+        document.body.style.backgroundImage = "";
+      } else if(url.match(/\.(jpg|jpeg|png|gif)$/i) || url.startsWith("data:image")){
+        yt.innerHTML = "";
+        v.style.display = "none";
+        document.body.style.backgroundImage = `url(${url})`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundPosition = "center";
+        document.body.style.backgroundAttachment = "fixed";
+      } else {
+        // fallback: try as image
+        yt.innerHTML = "";
+        v.style.display = "none";
+        document.body.style.backgroundImage = `url(${url})`;
+      }
+    }
+
+    function extractYoutubeId(url){
+      const regExp = /^.*(youtu.be\/|v\/|u\/\\w\/|embed\/|watch\\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    // ===================== UPDATE LOG =====================
+    const updateData = [
+      {version: "v1.0", date: "2025-06-18", desc: "🚀 ra mắt giao diện + tìm kiếm gg + shortcuts"},
+      {version: "v1.1.2", date: "2025-09-04", desc: "🎨 Thêm chức năng đổi nền (ảnh, gif, video, YouTube)."},
+      {version: "v1.3", date: "2025-09-05", desc: "📝 Thêm AI và bbor phần báo trí thành lối tắt kênh viễn thông Việt Nam."},
+      {version: "v1.3.1", date: "2025-09-05", desc: "📝 Thêm đề xuất video & nhạc bỏ phần AI vì bị lỗi."}
+    ];
+    function toggleUpdateLog(){
+      const box = document.getElementById("updateLog");
+      if(box.style.display === "none" || !box.style.display){
+        renderUpdateLog();
+        box.style.display = "block";
+      } else box.style.display = "none";
+    }
+    function renderUpdateLog(){
+      const content = document.getElementById("updateContent");
+      content.innerHTML = "";
+      updateData.slice().sort((a,b)=> new Date(b.date) - new Date(a.date)).forEach(u=>{
+        content.innerHTML += `<div style="margin-bottom:12px;"><strong>${u.version}</strong> - <em>${u.date}</em><br><span>${u.desc}</span></div>`;
+      });
+    }
+
+const YT_API_KEY = "AIzaSyAS5E4D4223K2BkVEgGQPgENuJnLwISBM0"; // <-- Thay bằng key của bạn
+
+async function fetchYoutubeVideos(query, maxResults = 6) {
+  try {
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${encodeURIComponent(query)}&maxResults=${maxResults}&key=${YT_API_KEY}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (!data.items) return defaultVideos;
+    return data.items.map(v => ({
+      title: v.snippet.title,
+      videoId: v.id.videoId
+    }));
+  } catch(e) {
+    console.error("Lỗi lấy video:", e);
+    return defaultVideos;
   }
-
-  chat.scrollTop = chat.scrollHeight;
-}
-//======UPDATELOG
-const updateData = [
-  {version: "v1.0", date: "2025-07-18", desc: "🚀 ra mắt giao diện + tìm kiếm gg + shortcuts"},
-  {version: "v1.1.2", date: "2025-09-04", desc: "🎨 Thêm chức năng đổi nền (ảnh, gif, video, YouTube)."},
-  {version: "v1.3", date: "2025-09-05", desc: "🤖 Thêm widget hỏi AI (bản dùng API OpenAI)."},
-  {version: "v1.31", date: "2025-09-05", desc: "📝 thay đổi bỏ phần báo trí tạo thành lối tắt viễn thông Việt Nam."}
-];
-
-function toggleUpdateLog(){
-  const box = document.getElementById("updateLog");
-  if(box.style.display==="none" || !box.style.display){
-    renderUpdateLog();
-    box.style.display="block";
-  } else {
-    box.style.display="none";
-  }
 }
 
-function renderUpdateLog(){
-  const content=document.getElementById("updateContent");
-  content.innerHTML="";
-  updateData.forEach(u=>{
-    content.innerHTML += `
-      <div style="margin-bottom:12px;">
-        <strong>${u.version}</strong> - <em>${u.date}</em><br>
-        <span>${u.desc}</span>
-      </div>
-    `;
+// Render video vào container
+function renderVideos(videos) {
+  const container = document.getElementById("videoContainer");
+  container.innerHTML = "";
+  videos.forEach(v => {
+    const wrapper = document.createElement("div");
+    wrapper.style.flex = "1 1 300px";
+    wrapper.style.maxWidth = "300px";
+    wrapper.style.textAlign = "center";
+
+    const iframe = document.createElement("iframe");
+    // Dùng playlist=VIDEO_ID để loop liên tục
+    iframe.width = "300";
+    iframe.height = "170";
+    iframe.src = `https://www.youtube.com/embed/${v.videoId}?autoplay=1&loop=1&playlist=${v.videoId}&controls=1&modestbranding=1&rel=0`;
+    iframe.frameBorder = "0";
+    iframe.allow = "autoplay; encrypted-media";
+    iframe.allowFullscreen = true;
+
+    const title = document.createElement("p");
+    title.textContent = v.title;
+    title.style.fontSize = "14px";
+    title.style.margin = "6px 0";
+
+    wrapper.appendChild(iframe);
+    wrapper.appendChild(title);
+    container.appendChild(wrapper);
   });
 }
 
-</script>
+// Ví dụ: load mặc định với query "chill music"
+document.addEventListener("DOMContentLoaded", async () => {
+  const videos = await fetchYoutubeVideos("chill music");
+  renderVideos(videos);
+});
+
+    // ===================== YOUTUBE VIDEO SUGGESTIONS (API placeholder) =====================
+    const YOUTUBE_API_KEY = "AIzaSyAS5E4D4223K2BkVEgGQPgENuJnLwISBM0"; // <-- THAY BẰNG KEY CỦA BẠN KHI CẦN
+    async function getYoutubeVideos(query){
+      // If key is placeholder or empty, return demo static list
+      if(!YOUTUBE_API_KEY || YOUTUBE_API_KEY === "AIzaSyAS5E4D4223K2BkVEgGQPgENuJnLwISBM0"){
+        // demo fallback
+        return [
+          { title: "Lofi Hip Hop Radio - Beats to Relax/Study to", videoId: "jfKfPfyJRdk", thumbnail: "https://img.youtube.com/vi/jfKfPfyJRdk/mqdefault.jpg" },
+          { title: "EDM Mix 2024", videoId: "LXb3EKWsInQ", thumbnail: "https://img.youtube.com/vi/LXb3EKWsInQ/mqdefault.jpg" },
+          { title: "Relaxing Piano Music", videoId: "ScMzIvxBSi4", thumbnail: "https://img.youtube.com/vi/ScMzIvxBSi4/mqdefault.jpg" },
+          { title: "Anime Lofi Mix", videoId: "O6N6zXbtwDI", thumbnail: "https://img.youtube.com/vi/O6N6zXbtwDI/mqdefault.jpg" },
+          { title: "Chill Beats to Study To", videoId: "5qap5aO4i9A", thumbnail: "https://img.youtube.com/vi/5qap5aO4i9A/mqdefault.jpg" },
+          { title: "Top Hits 2024 - EDM", videoId: "JGwWNGJdvx8", thumbnail: "https://img.youtube.com/vi/JGwWNGJdvx8/mqdefault.jpg" }
+        ];
+      }
+
+      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${encodeURIComponent(query)}&maxResults=8&key=${YOUTUBE_API_KEY}`;
+      const res = await fetch(url);
+      if(!res.ok) throw new Error("YouTube API lỗi: " + res.status);
+      const data = await res.json();
+      return data.items.map(v => ({
+        title: v.snippet.title,
+        videoId: v.id.videoId,
+        thumbnail: v.snippet.thumbnails.medium.url
+      }));
+    }
+
+    async function renderVideos(query){
+      const q = query || document.getElementById("videoQuery").value.trim() || "lofi music";
+      const container = document.getElementById("videoResults");
+      container.innerHTML = "<div style='color:#cbd5e1;padding:8px'>Đang tải...</div>";
+      try {
+        const list = await getYoutubeVideos(q);
+        container.innerHTML = "";
+        list.forEach(item => {
+          const card = document.createElement("div"); card.className = "video-card";
+          card.innerHTML = `
+            <img class="video-thumb" src="${item.thumbnail}" alt="${escapeHtml(item.title)}" />
+            <div class="video-info">${escapeHtml(item.title)}</div>
+          `;
+          card.onclick = ()=> playInPlayer(item.videoId);
+          container.appendChild(card);
+        });
+      } catch(err){
+        container.innerHTML = `<div style="color:#ffb4a2">Không tải được danh sách video: ${err.message}</div>`;
+      }
+    }
+
+    function refreshVideos(){ renderVideos(); }
+
+    // Play clicked video in the big iframe player
+    function playInPlayer(videoId){
+      const player = document.getElementById("mainPlayer");
+      player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      player.style.display = "block";
+      window.scrollTo({ top: document.getElementById("playerWrap").offsetTop - 10, behavior: 'smooth' });
+    }
+
+    // ===================== MUSIC PLAYER LIST (LOCAL PLAYLIST) =====================
+    const musicData = [
+      { title: "Nhạc Chill (Sample)", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+      { title: "Lofi Study (Sample)", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+      { title: "Nhạc EDM (Sample)", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
+    ];
+    function loadMusicList(){
+      const wrap = document.getElementById("musicList"); wrap.innerHTML = "";
+      musicData.forEach((m, idx) => {
+        const item = document.createElement("div"); item.className = "music-item";
+        item.innerHTML = `
+          <div class="meta">
+            <div style="font-weight:700">${m.title}</div>
+            <div style="font-size:13px; color:var(--muted)">Nguồn: sample</div>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <audio id="audio-${idx}" preload="none">
+              <source src="${m.url}" type="audio/mpeg">
+              Trình duyệt không hỗ trợ audio.
+            </audio>
+            <button onclick="togglePlay(${idx})" id="btn-${idx}">▶️</button>
+          </div>
+        `;
+        wrap.appendChild(item);
+
+        const audioEl = item.querySelector("audio");
+        audioEl.onended = ()=> onTrackEnded(idx);
+      });
+    }
+
+    function togglePlay(index){
+      const audio = document.getElementById("audio-" + index);
+      const btn = document.getElementById("btn-" + index);
+      if(audio.paused){
+        // pause others
+        musicData.forEach((_,i)=> {
+          const a = document.getElementById("audio-" + i);
+          const b = document.getElementById("btn-" + i);
+          if(a && !a.paused){ a.pause(); if(b) b.textContent = "▶️"; }
+        });
+        audio.play(); btn.textContent = "⏸";
+      } else { audio.pause(); btn.textContent = "▶️"; }
+    }
+
+    function onTrackEnded(index){
+      // auto next
+      let next = index + 1;
+      if(next >= musicData.length) next = 0;
+      const nextAudio = document.getElementById("audio-" + next);
+      const nextBtn = document.getElementById("btn-" + next);
+      // stop current UI
+      const curBtn = document.getElementById("btn-" + index);
+      if(curBtn) curBtn.textContent = "▶️";
+      if(nextAudio){ nextAudio.play(); if(nextBtn) nextBtn.textContent = "⏸"; }
+    }
+
+    function playAll(){
+      if(musicData.length === 0) return;
+      const a0 = document.getElementById("audio-0");
+      const b0 = document.getElementById("btn-0");
+      if(a0){ a0.play(); if(b0) b0.textContent = "⏸"; }
+    }
+    function stopAll(){
+      musicData.forEach((_,i)=> {
+        const a = document.getElementById("audio-" + i);
+        const b = document.getElementById("btn-" + i);
+        if(a){ a.pause(); a.currentTime = 0; }
+        if(b) b.textContent = "▶️";
+      });
+    }
+
+    // ===================== UTIL =====================
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+    }
+
+    // ===================== INIT on load =====================
+    document.addEventListener("DOMContentLoaded", ()=>{
+      // render update log
+      renderUpdateLog();
+
+      // load background (from indexedDB)
+      // (IndexedDB request.onSuccess above will apply if exists)
+
+      // video and music sections
+      renderVideos(); // default query "lofi music"
+      loadMusicList();
+      renderShortcuts();
+    });
+
+    // Optional: click outside to hide bg menu or suggestions
+    document.addEventListener("click",(e)=>{
+      const bgm = document.getElementById("bgMenu");
+      const toggle = e.target.closest('.widget-item') || e.target.closest('#bgMenu') || e.target.closest('button');
+      if(!toggle && bgm) bgm.style.display = 'none';
+      const sug = document.getElementById("suggestions");
+      if(!e.target.closest('.search-container')) sug.style.display = 'none';
+    });
+
+  </script>
 </body>
 </html>
-
-
